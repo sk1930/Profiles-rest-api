@@ -1,0 +1,788 @@
+https://github.com/LondonAppDev/profiles-rest-api
+
+
+cheatsheet -- https://github.com/LondonAppDev/build-a-backend-api-python-drf-beginner-cheat-sheet/blob/master/README.md
+
+if vagrant ssh doesnnt work use vagrant up first.
+
+
+install oracle virtual box.
+
+https://www.virtualbox.org/
+cllick on download
+https://www.virtualbox.org/wiki/Downloads
+click on windows hosts
+it will download the files.
+keep all  settings default and install
+
+
+next install vagrant
+https://www.vagrantup.com/Downloads
+
+
+Add modheader extenrsion to chrome it makes easdy to add authentication headers.
+in terminal goto
+
+he went to C:\Users\Student\Desktop\Untitled Folder\Python\DjangoRestAPI\01profiles-rest-api and then entered git init
+
+
+goto https://gitignore.io/   it takes to https://www.toptal.com/developers/gitignore/
+and u can enter python, vagrant it will give https://www.toptal.com/developers/gitignore/api/python,vagrant
+ create a new file .gitignore and copy and paste that conetent from above link
+ 
+ create a file called license and copy and passte the coneten from https://choosealicense.com/licenses/mit/
+ and in [year] [fullname] add the year and name
+
+in the terminal in VSCODE change the terminal to gitbash
+we get the option of gitbash as we have installed git
+now in gitbash enter ls /.ssh
+Student@g7-44 MINGW64 ~/Desktop/Untitled Folder/Python/DjangoRestAPI (master)
+$ ls ~/.ssh
+known_hosts
+
+
+
+creating a new public/private key pair
+-t rsa means type rsa with 4096 bytes  -C "..." is a message to identify what key this is for.
+
+$ ssh-keygen -t rsa -b 4096 -C "DjangoRestApi.com"
+Generating public/private rsa key pair.
+
+Enter file in which to save the key (/c/Users/Student/.ssh/id_rsa):     
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /c/Users/Student/.ssh/id_rsa
+Your public key has been saved in /c/Users/Student/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:VFqNztCPZNE6IGBE5gdnZBCMOkEuVlNm+i4ecHTH5Wo DjangoRestApi.com
+
+
+passphrasr is like even if someone manages to get the keys from ur system they cant
+use it without passphrase.
+
+I enetered a passphrase of DjangoRest
+
+
+$ ls ~/.ssh
+id_rsa  id_rsa.pub  known_hosts
+id_rsa is private key
+id_rsa.pub is public key
+
+
+u can add this public key to the guthub accoubt by going to settings and select
+SSH and GPG keys 
+click on New ssh key
+now goto Gitbash 
+$ cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKU7XO0YamU674zBw7i8Fp3f/3zigGKGUu1aq6ttIZCm89X/ZCAhQxSoRrNndqAiwUQe9+jpSH/HKST6tlwWqoAGkuwmAkhrBitVSAKOwMY9V913VO8MK+fHzXYh8VCAJMnTZ6t06DoONh4S+ehMxP3w2AsFD+v9oE2/1lWLXa81w58XXixEumIplIjSdDWhfOhE8pQ3ZsnQDQQR5Yh3QHQqReeX6bpj4SkCw+frsiCreIwEwzYMnNSauM+o2Eo2lNvRPcq0pb484VliNUvQ8AM7/cdXLe8lSL8+5moeiuc83IsJzdTRHms242aV6c28K1OCInkmqbNLjkNl509JqkEDFh/557Oyj4Z5SpzRgHnd/JFagtNPZGSgbQLmR8N7Y7xkCZ6rsiS8yMSnHigMic1qbSofoWUK1uUDZzP5aVM5Pu5Wm0k8sE02r2JyMOQTPhjEfSVslMw0i0V+2UJlo6NB8vbLJL4GCI5oH/3yQ7DXWt3+U1Jvbdij0/YgDmLfOumFOM78E/BTv3S/etsZIosyQgAUXYgXU7fniDoOhKTWrjywLFjRK8lgaB3kngo3bLNDWG+gbwLzaXVYNtUe1bKsfr7dCygby+oUpRsIq4VG4eviePVNvJN96QNXK8/SEGZNvk+/hga9uVk8pMQUg422143bA+JL/bYIyKTRkOKQ== DjangoRestApi.com
+
+ copy this key and paste in github...add new key and give it a title.
+
+we are not going to add this key to Github for now..
+but \just got an idea on how to create the keys.
+
+goto github and create  a repo profiles-rest-api
+
+
+git remote add origin https://github.com/sk1930/Profiles-rest-api.git
+git push -u origin main
+
+
+create the development server using vagrant
+in the command prompt in visual studio code 
+
+
+C:\Users\Student\Desktop\Untitled Folder\Python\DjangoRestAPI\01profiles-rest-api>vagrant init ubuntu/bionic64
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+
+This creates a vagrant file.
+ we have to custimise this file as per our requeirements,
+ for now in the resources there is a file replace the contents with that.'
+ https://gist.github.com/LondonAppDev/199eef145a21587ea866b69d40d28682
+ 
+ 
+ C:\Users\Student\Desktop\Untitled Folder\Python\DjangoRestAPI\01profiles-rest-api>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+
+ vagrant up
+what this will do is it will download the base image that we've specified in 
+our vagrant file and then it will use VirtualBox to create a new virtual
+machine and then run our provisioning script when it starss the machine.
+ we can then use our development server and connect to it using the vagrant tool
+which I'll show you right after the machine has been created
+
+once the vagrant box has been started we can then connect to the vagrant server
+by using the vagrant SSH command since our box is a completely different
+isolated box on our machine so it's a guest operating system we need to
+connect to it using SSH the way that you do this is you type vagrant SSH and then
+vagrant will handle the connection to the machine for you.
+you can see that
+you're on the machine because the input changes for your git bash or your
+terminal window you can see that we're now on vagrant at Ubuntu Bionic to
+disconnect from the machine simply type exit and this will take you outside of
+the machine back onto your local machine so if you type vagrant SSH and you
+connect to the machine any command that you run in the terminal while you're
+connected to the machine will be ran on your guest operating system or the
+development server instead of your local machine okay so that's how you connect
+to the server with vagrant
+
+C:\Users\Student\Desktop\Untitled Folder\Python\DjangoRestAPI\01profiles-rest-api>vagrant ssh
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-204-generic x86_64)
+
+vagrant@ubuntu-bionic:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+
+C:\Users\Student\Desktop\Untitled Folder\Python\DjangoRestAPI\01profiles-rest-api>vagrant ssh
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-204-generic x86_64)
+
+vagrant@ubuntu-bionic:~$ cd /vagrant 
+all the files here are synchronized with the files in our project directory 01profiles-rest-api/python
+
+vagrant@ubuntu-bionic:~$ cd /vagrant
+vagrant@ubuntu-bionic:/vagrant$ ls
+LICENSE  README.md  Vagrantfile  ubuntu-bionic-18.04-cloudimg-console.log
+vagrant@ubuntu-bionic:/vagrant$ 
+
+
+
+Student@g7-44 MINGW64 ~/Desktop/Untitled Folder/Python/DjangoRestAPI/01profiles-rest-api (master)
+$ git add .
+
+Student@g7-44 MINGW64 ~/Desktop/Untitled Folder/Python/DjangoRestAPI/01profiles-rest-api (master)
+$ git status
+
+        new file:   Vagrantfile
+
+
+Student@g7-44 MINGW64 ~/Desktop/Untitled Folder/Python/DjangoRestAPI/01profiles-rest-api (master)
+$ git commit -m "Configured vagrant"
+[master 6bbd2f8] Configured vagrant
+ 1 file changed, 32 insertions(+)
+ create mode 100644 Vagrantfile
+ 
+ 
+ 
+ creating the python virtual environment:
+ =========
+vagrant ssh
+vagrant@ubuntu-bionic:~$ cd /vagrant
+vagrant@ubuntu-bionic:/vagrant$ pythvagrant@ubuntu-bionic:/vagrant$ python -m venv ~/env
+
+~/env - this means we are creating the Venv in env folder and this means it will not be synchronized with 
+out project folder only the content in /vagrant is synchronized
+
+
+vagrant@ubuntu-bionic:/vagrant$ python -m venv ~/env
+vagrant@ubuntu-bionic:/vagrant$ source ~/env/bin/activate     //to activate the env
+(env) vagrant@ubuntu-bionic:/vagrant$ deactivate
+vagrant@ubuntu-bionic:/vagrant$ 
+
+create a file requirements.txt file in the 01profiles-rest-api folder
+vagrant@ubuntu-bionic:/vagrant$ source ~/env/bin/activate
+(env) vagrant@ubuntu-bionic:/vagrant$ pip install -r requirements.txt 
+
+
+
+if . is not passed it creates a separate directory.
+we dont want to create a subdirectory and create the files in the same location so we pass the .
+(env) vagrant@ubuntu-bionic:/vagrant$ django-admin.py startproject profiles_project .
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py startapp profiles_api
+
+
+in the settings.py in installed_apps add
+'rest_framework',
+'rest_framework.authentication',
+'profiles_api',
+
+
+0.0.0.0 means make it available on all network adapters on our
+development server and this colon 8000 says start it in port 8000 so we can
+access it via port 8000
+if you remember in our vagrant file we mapped port 8000
+on our host machine to port 8000 on the development machine and that's why we
+specify port 8000
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py runserver 0.0.0.0:8000
+now in ur browser hit http://127.0.0.1:8000/
+python manage.py runserver 8000  i tried without 0.0.0.0 and http://127.0.0.1:8000/ didnt work.--- 
+
+
+goto gitbash terminal and do git add and git commit -m " addede profiles project and first app - profile_api"
+
+Models
+=========
+The first model that we're going to create for our project is the user
+profile model
+Out of the box Django comes with a default user model
+that's used for the standard authentication system and also the
+Django admin
+We're going to override this model with our own custom model
+that allows us to use an email address instead of the standard username that
+comes with the Django default model
+
+https://docs.djangoproject.com/en/4.1/topics/auth/customizing/#substituting-a-custom-user-model
+IN models.py in profiles_api create UserProfile class.
+
+
+Now that we have our custom user model we can go ahead and create a manager so
+Django knows how to work with this custom user model in the Django
+command-line tools.
+one of the commands that we're going to be using in a future
+video is the create super user command this is a command that's provided with
+the Django CLI that makes it really easy to add super users to the system so a
+super user is an administrator user that will have full control and be able to
+access the Django admin and see all the models in the database now because we've
+customized our user model we need to tell Django how to interact with this
+user model in order to create users because by default when it creates a
+user it expects a username field and a password field but we've replaced the
+username field with an email field so we just need to create a custom manager
+that can handle creating users with an email field instead of a username field
+so let's go ahead and create our custom user manager class 
+UserProfileManager in our models. py file
+
+ first function that we need to create is
+the create underscore user function this is what the Django CLI will use when
+creating users with the command line tool.
+
+
+    def create_user(self,email,name,password=None):
+
+password equals none so this means that if you don't specify a
+password then it will default to none and because of the way the Django
+password checking system works a none password won't work because it needs to
+be a hash so basically until you set a password you won't be able to
+authenticate with the user.
+
+
+what normalizing an email address
+does is it makes the second half of the email address all lowercase
+so technically with an email address the first half of the email is
+case-sensitive that means you could have two separate email addresses with the
+capital letters or with lower case letters and then the second half is
+always case insensitive so it's best practice to standardize that by making
+it lowercase now a lot of email providers such
+as Gmail and Hotmail and things like that will make the first half case
+insensitive as well just for convenience but technically it could be case
+sensitive depending on the email provider so that's why normalized email
+only takes care of the second half
+Okay so let's set email equals
+        email = self.normalize_email(email) # click on normalize_email and see goto definition.
+
+
+Next we're going to set the
+password and we can't just pass the password in here as a clear text value
+we need to use the set password function that comes with our user model so it's
+part of the abstract base user and we set this by doing user dot set
+password password and pass it in like that the reason we do that is so the
+password is encrypted we want to make sure the password is converted to a hash
+and never stored as plain text in the database because this way if somebody
+should manage to hack the database and retrieve all the users they would only
+be able to see the hashed passwords which means they wouldn't be able to
+convert that password to a clear text password and then potentially use that
+to log into the users other services if they used the same password for Facebook
+or another website for example
+They could technically reverse-engineer it
+eventually if they'd given it enough time so it doesn't mean you don't have
+to protect your database but it's the best practice for storing any sensitive
+data in the database is to encrypt it and by default Django does this with the
+set password function
+
+        user.save(using = self._db)
+
+Okay now we can save the user model so type user dot
+Save and then the standard is to specify the database that you want to use so
+Django can support multiple databases and we're only going to be using one database
+but it's best practice to add this line anyway just to make sure that you
+support multiple databases in the future if you should at it so type using equals
+self._db
+
+next     def create_superuser(self,email,name,password=None):
+
+
+Okay if you're a bit confused as to where these is superuser and is staff
+items came from then that's because we didn't actually specify...well
+we did specify is staff but we didn't specify is super user in our user model because
+it automatically is created by the permissions mixin
+
+
+Setting our custom user model:
+====================================
+in settings.py
+AUTH_USER_MODEL = 'profiles_api.UserProfile'
+
+so this tells Django to look at our profiles API app
+and then find the model called user profile and use this for all of our
+authentication and user registration in our project
+
+
+creating migrations and synch DB
+================
+
+
+>vagrant ssh
+vagrant@ubuntu-bionic:~$ cd /vagrant
+vagrant@ubuntu-bionic:/vagrant$ source ~/env/bin/activate
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py makemigrations profiles_api
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py migrate
+
+git add .
+$ git commit -m "Added custom user profile model, manager and migrations"
+
+
+creating super user
+==========
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py createsuperuser
+Email: saikrishna1930@gmail.com
+Name: saikrishna
+Password:  Django@098
+Password (again): 
+Superuser created successfully.
+
+
+enabling django admin model for our userprofile model.
+in admin.py
+admin.site.register(models.UserProfile)
+
+
+now without --noreload the server is reloading continuously not sure what is the issue
+https://stackoverflow.com/questions/61007749/python-manage-py-runserver-keeps-reloading-stating-file-has-changed
+so use --reload.
+
+>vagrant ssh
+vagrant@ubuntu-bionic:~$ cd /vagrant
+vagrant@ubuntu-bionic:/vagrant$ source ~/env/bin/activate
+(env) vagrant@ubuntu-bionic:/vagrant$ python manage.py runserver 0.0.0.0:8000 --noreload
+
+goto http://127.0.0.1:8000/admin and enter saikrishna1930@gmail.com/Django@098
+
+C:\Users\Student\Desktop\Untitled Folder\Python\
+DjangoRestAPI\01profiles-rest-api>pip install djangorestframework
+
+
+APIS
+=============
+in views.py create HelloApiView
+
+
+    def get(self, request, format=None):
+
+parameters here are self which is required for all
+class functions a request object this is passed in by the Django rest framework
+and contains details of the request being made to the API and the format
+which is used to add a format suffix to the end of the endpoint URL we're not
+going to be using the format but it's best practice to keep it in here so if
+you do ever enable formats on your API it will be supported by the function
+
+
+Test API views
+========
+
+http://127.0.0.1:8000/api/hello-view/
+
+HTTP 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "message": "Hello!",
+    "an_apiview": [
+        "Uses HTTP methods as functions (get, post, patch, put, delete)",
+        "Is similar to a traditional Django View",
+        "Gives you the most control over your logic",
+        "Is mapped manually to URLs"
+    ]
+}
+
+goto git bash and commitgit commit -m "added helloApiView"
+\
+
+Serializer
+==============
+ a serializer is a feature from the Django rest framework that allows you to
+easily convert data inputs into Python objects and vice versa it's kind of
+similar to a django form which you define and it has the various fields
+that you want to accept for the input for your api so if we're going to add
+post or update functionality to our hello API view then we need to create a
+serializer to receive the content that we post to the API 
+
+
+It's good practice to
+keep all of your sterilizers for your app in a single file called serializers.py
+we're going to create a simple serializer that
+accepts a name input and then we're going to add this to our API view and
+we're going to use it to 
+
+"test the post functionality of our API view."
+
+serializers function very similar to Django forms if you've
+ever used them if you haven't use them don't worry they're quite simple. 
+to get your head around all you do is you define the serializer and then you
+specify the fields that you want to accept in your serializer input so we're
+going to create a field called name and this is a value that can be passed into
+the request that will be validated by the serializer
+So sterilizers also take
+care of validation rules so if you want to say you want to accept a certain
+field of a certain type serializers will make sure that the content past that api
+is of the correct type that you want to require for that field
+
+
+
+Add post method to API view
+=========================
+The status object from the rest framework is a list of
+handy HTTP status codes that you can use when returning responses from your API
+
+in views.py to HelloApiView class add    
+serializer_class = serializers.HelloSerializer
+
+
+add def post to views.py
+
+        serializer = self.serializer_class(data=request.data)
+
+
+what should happen if the
+input is not valid well we're going to return a HTTP 400 bad request
+response so in the if statement type else : and then return
+and return a response and then in the response we're going to pass in the
+errors that were generated by the serializer so if you type serializer dot
+errors this will give you a dictionary of all the errors based on the
+validation rules that were applied to the serializer so it's a good idea to
+return this so the person that's using the API knows what went wrong when they
+tried to submit an invalid response
+Okay by default the response returns HTTP 200 okay request 
+
+
+now since this was an error we need to change this to a 400 bad
+request so we return the standard error response code for this type of error in
+an API so let's actually break this down on to separate lines
+here and let's add a second parameter called status 
+              status=status.HTTP_400_BAD_REQUEST
+
+
+in urls.py we have earlier added 
+    path('hello-view/', views.HelloApiView.as_view()),
+
+we need not add for each method we can just hit 
+http://127.0.0.1:8000/api/hello-view/
+
+scroll down and there will be a option to enter name and click on POST
+
+if u type saikrishna and click on POST
+u get the response as 
+HTTP 200 OK
+Allow: GET, POST, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "message": "Hello saikrishna!"
+}
+
+
+if u type saikrishna padamatinti and click on POST
+
+HTTP 400 Bad Request
+Allow: GET, POST, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "name": [
+        "Ensure this field has no more than 10 characters."
+    ]
+}
+
+
+HTTP put
+===========
+ HTTP put is often used to update an object
+what you do is you make a request with HTTP put and it will
+update the entire object with what you've provided in the request
+
+HTTP put you typically do it to a specific URL primary key
+that's why we have this PK but we default it to none in case we don't want
+to support the PK in this particular API view but usually what you would do is
+you would do a put to the URL with the ID of the object that you're updating
+and that's what we use this PK for this is to take the ID of the object to be
+updated with the put request we're not actually going to be updating an object
+we're just going to return a standard response just to demonstrate how you can
+add the put method to our API view 
+
+
+PUT vs patch
+==================
+add a HTTP patch so type def patch self request and PK equals
+none and this is to handle a partial update of an object so what you would typically
+use HTTP patch for is to do an update but only update the fields that were
+provided in the request so if you had a first name and a last name field and you
+made a patch request with just providing the last name it would only update the
+last name whereas if you did a put request and you only provided the last
+name then in that case it would remove the first name completely because HTTP
+put is essentially replacing an object with the object that was provided
+whereas patch is only updated the fields that were provided in the reques
+
+Okay so these are the two update requests or typically used for
+updating objects 
+
+
+next we're going to create a delete request so def delete
+self request PK equals none and then we'll write a doc string delete an
+object
+As you can imagine the delete request is used for deleting objects in
+the database so for the delete one let's return response method delete okay so
+make sure you save that file and that's how you add the HTTP put patch and delete
+methods to an API view.
+
+
+
+Test put, patch and delete:
+=================
+restart the server and http://127.0.0.1:8000/api/hello-view/
+scroll down and click on HTML form
+
+
+for patch to be visible click on raw data
+
+
+The reason you need to use raw data is because the way patch works is you
+provide only the fields that you want to update in the API so if you
+use this HTML form then it basically has a list of all the fields that are
+available and when you put put it would put the contents of all of
+these fields to the API whereas with patch you want to actually
+exclude fields so the Django rest framework requires that you define the
+content as a JSON string here in the editor
+So if we just do open and close a
+blank JSON string
+in the content field 
+{}
+
+ and hit patch this will do a patch request and return the
+response from our patch function 
+
+
+for put just click on put and u willl get the respponse as method [put
+for delete just click the delete on top right and u will get a confirmation click on ok and you will get response as method delete.
+git commit - m "added post put patch and delete methods to our API view"
+Hit enter and then do git push
+
+
+
+
+Viewsets
+===========================
+Let's talk about view sets at the beginning of the last section I
+mentioned that the Django rest framework offers two classes that help us write
+the logic for our API the API view and the view set
+In the last section I
+introduced you to the API view and in this section I'm going to teach you how
+to use the view set.
+
+So what are view sets? Just like API views, view sets allow
+us to write the logic for our endpoints however instead of defining functions
+which map to HTTP methods view sets accept functions that map to common API
+object actions such as 
+list for getting a list of objects
+Create for creating new objects 
+retrieve for getting a specific object 
+update for updating an object 
+partial update for updating part of an object 
+and finally destroy for deleting an object
+
+Additionally view sets can take care a
+lot of the common logic for us 
+they're perfect for writing apis that perform standard database operations 
+and they're the fastest way to make an api which interfaces with a database back-end
+
+So when should you use view sets? Well a lot
+of the time this comes down to personal preference however here are some
+examples of cases when you might want to prefer a view set over an API view for
+
+example if you need to write an API that performs a simple create read update and
+delete operation on an existing database model
+or you need a quick and simple API to manage predefined objects or 
+maybe you need a very basic custom logic additional to the view set features already provided by the Django rest framework
+finally you might want to use a view set if your API is working with standard database structure 
+
+
+
+
+
+
+the way you register the view set with a with a URL is slightly different from how you register the API view with the
+URL if you open up the URL dot py file we can see that we passed in a new URL
+pattern using the path function to register our API view with the hello -view URL
+the way that view sets work is you use what's called a router which is
+a class that's provided by the Django rest framework in order to generate the
+different routes that are available for our view set so with our view set you
+may be accessing the list request which is just the route of our API and in this
+
+case you would use a different URL than if you are accessing a specific
+object to do an update a delete or a get
+I'll show you how this works in a couple
+more videos when we test our view set in the browser for now let's create a
+default router and register our view set with the default router and
+pass the URLs into URL pattern
+
+router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
+the router will create all of the four URLs for us we don't need to specify a forward slash here when we define our view set URL name
+
+
+    path('', include(router.urls)),
+
+as you register new routes with our router it generates a list of URLs that
+are associated for our view set it figures out the URLs that are required
+for all of the functions that we add to our view set and then it generates this
+URLs list which we can pass in to using the path function and the include function to our URL patterns
+the reason we specify a blank string here is
+because we don't want to put a prefix to this URL we just want to include all of
+the URLs in the base of this URLs file
+
+
+lets test now
+http://127.0.0.1:8000/api/
+ 
+the router has a cool function where it will add this browsable API for all the other items registered to our router 
+includes things we register via our router
+
+
+http://127.0.0.1:8000/api/ shows 
+
+
+HTTP 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "hello-viewset": "http://127.0.0.1:8000/api/hello-viewset/"
+}
+
+click on the url provided above ie http://127.0.0.1:8000/api/hello-viewset/
+
+it will give HTTP 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "message": "Hello!",
+    "a_viewset": [
+        "Uses actions (list, create, retrieve, update, partial_update)",
+        "Automatically maps to URLS using Routers",
+        "Provides more functionality with less code"
+    ]
+}
+
+
+Add create, retrieve, update, partial_update and destroy functions
+=====================================
+
+let's start by adding the serializer class and we can use the same serializer that we created for our API view with the name field we can
+share the same serializer for both of our view sets and we specify the serializer in our view set the same way as we do for our API view.
+
+
+retrieve function is for retrieving a specific object in our viewset so you would typically pass in a primary key ID to the URL in the request
+and that will return or retrieve the object with that primary key ID
+
+retrieve is like get
+update is like put
+partial_update is like patch
+destroy is like delete.
+
+
+lets test the viewset
+start the server (env) vagrant@ubuntu-bionic:/vagrant$ python manage.py runserver 0.0.0.0:8000
+
+goto http://127.0.0.1:8000/api/
+it will show http://127.0.0.1:8000/api/hello-viewset/
+on going here http://127.0.0.1:8000/api/hello-viewset/
+it will show post
+type saikrishna for name and click on post 
+
+
+    "message": "Hello saikrishna!"
+
+
+if u give  saikrishna padamatinti
+
+
+{
+    "name": [
+        "Ensure this field has no more than 10 characters."
+    ]
+}
+
+
+okay unlike the API view we don't actually see the put patch and delete
+methods here on the hello view set API that's because view sets expect that you
+will use this endpoint (i think this one http://127.0.0.1:8000/api/hello-viewset/)  to retrieve a list of objects in the database and you
+will specify a primary key ID in the URL when making changes to a specific object
+so if we want to see these additional functions that we added we need to add
+something to the end of the URL. now in in this case because we aren't actually
+retrieving any real objects it doesn't matter what you type but if you just put
+a number here that would represent a primary key of an object that you wanted to
+change and hit enter
+like 
+http://127.0.0.1:8000/api/hello-viewset/1/
+
+then it will change the page to the get request which is the
+retrieve of that object 
+HTTP 200 OK
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "http_method": "GET"
+}
+
+so when you specify a primary key to a view set URL
+it calls the retrieve function and as you can see in our retrieve function we
+return this response HTTP method get which you can see here
+in the browser then you can perform various updates and delete functions on
+the different objects 
+so if you hit delete then it will call the destroy
+function that we defined which will return HTTP method delete
+Vary: Accept
+
+{
+    "http_method": "DELETE"
+}
+
+ you can also perform updates on the object so by default you will perform a put update so
+if 
+in name field enter test and click on put 
+you can see that it returns the HTTP
+method put and that will be from our update function
+Vary: Accept
+
+{
+    "http_method": "PUT"
+}
+
+
+Finally if you want to
+do a partial update then you need to click on the raw data tab here and then
+you can see you get the put and patch options if you click on patch it returns
+the HTTP method patch 
+Vary: Accept
+
+{
+    "http_method": "PATCH"
+}
+
+
+
+let's go ahead and commit our changes and push them to github open up
+the terminal and open a fresh window that is on our project and type git add
+dot to add any new files and git commit -
+
+am and we'll write the message added view set to profiles API
+
+hit enter and then do git push origin to push all of the changes up to github
